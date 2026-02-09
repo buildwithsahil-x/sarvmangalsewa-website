@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mission Sarvmangal Sewa Samiti - Serving the community with dedication and compassion">
+    <title>Mission Sarvmangal Sewa Samiti</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #2d5a2d;
+            --light-green: #4a7c4a;
+            --accent-green: #6b9b6b;
+            --cream: #f8f6f0;
+            --white: #ffffff;
+            --text-dark: #333333;
+            --text-light: #666666;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--cream);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-green), var(--light-green));
+            color: var(--white);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(45, 90, 45, 0.8), rgba(45, 90, 45, 0.8)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%234a7c4a" width="1200" height="600"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 6rem 2rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .logo-container {
+            margin-bottom: 2rem;
+        }
+
+        .logo-container img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            background: var(--white);
+            padding: 10px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+            opacity: 0.95;
+        }
+
+        .sanskrit-text {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--primary-green);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255,255,255,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary-green);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        /* Mission Section */
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .mission-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .mission-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .mission-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* About Section */
+        #about {
+            background: var(--white);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .reg-number {
+            background: var(--cream);
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+            color: var(--primary-green);
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        /* Focus Areas */
+        .focus-areas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .focus-item {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-green);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .focus-item h4 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--white);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            background: var(--cream);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card a {
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        .contact-card a:hover {
+            color: var(--primary-green);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-green);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .social-links a:hover {
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1.1rem;
+            }
+
+            .logo-container img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .mission-grid, .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo-text">Mission Sarvmangal Sewa Samiti</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#mission">Mission</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content fade-in-up">
+            <div class="logo-container">
+                <img src="Logo.jpg" alt="Mission Sarvmangal Sewa Samiti Logo">
+            </div>
+            <h1>Mission Sarvmangal Sewa Samiti</h1>
+            <p class="sanskrit-text">निस्वार्थ सेवा परमो धर्मः</p>
+            <p class="tagline">Serving Humanity with Compassion and Dedication</p>
+            <div class="cta-buttons">
+                <a href="#about" class="btn btn-primary">Learn More</a>
+                <a href="#contact" class="btn btn-secondary">Get Involved</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <div class="about-content">
+                <p>Mission Sarvmangal Sewa Samiti is a dedicated non-governmental organization committed to serving the community through selfless service and compassion. Guided by the principle of "निस्वार्थ सेवा परमो धर्मः" (Selfless Service is the Supreme Duty), we work tirelessly to create positive change in society.</p>
+                
+                <p>Our organization embodies the values of knowledge, growth, community service, and care for all living beings. Through our integrated approach, we strive to uplift communities and create lasting impact in the lives of those we serve.</p>
+                
+                <div class="reg-number">
+                    Registered Organization | Reg. No: UK0640882025015186
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section id="mission">
+        <div class="container">
+            <h2>Our Mission</h2>
+            <p class="section-subtitle">Building a better tomorrow through service and compassion</p>
+            
+            <div class="mission-grid">
+                <div class="mission-card">
+                    <div class="mission-icon">📚</div>
+                    <h3>Education</h3>
+                    <p>Promoting knowledge and learning opportunities for all, empowering communities through education and skill development.</p>
+                </div>
+                
+                <div class="mission-card">
+                    <div class="mission-icon">🌱</div>
+                    <h3>Growth & Development</h3>
+                    <p>Fostering sustainable growth and holistic development in communities through various initiatives and programs.</p>
+                </div>
+                
+                <div class="mission-card">
+                    <div class="mission-icon">🤝</div>
+                    <h3>Community Service</h3>
+                    <p>Engaging in selfless service to strengthen community bonds and create positive social impact.</p>
+                </div>
+                
+                <div class="mission-card">
+                    <div class="mission-icon">🐄</div>
+                    <h3>Animal Welfare</h3>
+                    <p>Caring for and protecting animals, recognizing their importance in our ecosystem and culture.</p>
+                </div>
+            </div>
+
+            <div class="focus-areas" style="margin-top: 3rem;">
+                <h2 style="grid-column: 1 / -1; margin-bottom: 1rem;">Our Focus Areas</h2>
+                <div class="focus-item">
+                    <h4>📖 Educational Programs</h4>
+                    <p>Supporting education initiatives and literacy programs</p>
+                </div>
+                <div class="focus-item">
+                    <h4>🏥 Healthcare Services</h4>
+                    <p>Providing healthcare support to underserved communities</p>
+                </div>
+                <div class="focus-item">
+                    <h4>🌾 Rural Development</h4>
+                    <p>Empowering rural communities through sustainable programs</p>
+                </div>
+                <div class="focus-item">
+                    <h4>🌳 Environmental Care</h4>
+                    <p>Promoting environmental conservation and sustainability</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <p class="section-subtitle">Join us in our mission to serve and make a difference</p>
+            
+            <div class="contact-info">
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email Us</h3>
+                    <p><a href="mailto:contact@sarvmangalsewa.org">contact@sarvmangalsewa.org</a></p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">🌐</div>
+                    <h3>Visit Us</h3>
+                    <p><a href="https://sarvmangalsewa.org">www.sarvmangalsewa.org</a></p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">🤲</div>
+                    <h3>Get Involved</h3>
+                    <p>Volunteer or support our initiatives</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Mission Sarvmangal Sewa Samiti. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Reg. No: UK0640882025015186</p>
+            <p style="margin-top: 1rem; font-style: italic;">निस्वार्थ सेवा परमो धर्मः</p>
+        </div>
+    </footer>
+</body>
+</html>
