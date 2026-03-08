@@ -1,515 +1,1098 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mission Sarvmangal Sewa Samiti - Serving the community with dedication and compassion">
-    <title>Mission Sarvmangal Sewa Samiti</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mission Sarvmangal Sewa Samiti</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --saffron: #FF6B2B;
+      --gold: #FFB347;
+      --teal: #00C2A8;
+      --violet: #7C3AED;
+      --pink: #F43F8E;
+      --green: #22C55E;
+      --white: #FFFFFF;
+      --soft: #F8F6FF;
+      --dark: #1A1035;
+      --glass: rgba(255,255,255,0.18);
+      --glass-border: rgba(255,255,255,0.35);
+    }
 
-        :root {
-            --primary-green: #2d5a2d;
-            --light-green: #4a7c4a;
-            --accent-green: #6b9b6b;
-            --cream: #f8f6f0;
-            --white: #ffffff;
-            --text-dark: #333333;
-            --text-light: #666666;
-        }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background: var(--cream);
-        }
+    html { scroll-behavior: smooth; }
 
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--primary-green), var(--light-green));
-            color: var(--white);
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--soft);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
 
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    /* ─── NAVBAR ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 5%;
+      height: 72px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.5);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+      transition: all 0.3s ease;
+    }
 
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none;
+    }
+    .nav-logo img {
+      height: 44px; width: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--saffron);
+    }
+    .nav-logo-text {
+      display: flex; flex-direction: column;
+    }
+    .nav-logo-text span:first-child {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px; font-weight: 700;
+      color: var(--dark);
+      line-height: 1.2;
+    }
+    .nav-logo-text span:last-child {
+      font-size: 10px; color: var(--saffron);
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-        }
+    .nav-links {
+      display: flex; align-items: center; gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none; font-size: 14px; font-weight: 500;
+      color: var(--dark); opacity: 0.75;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 2px; background: var(--saffron);
+      transform: scaleX(0); transition: transform 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+    .nav-links a:hover::after { transform: scaleX(1); }
 
-        nav a {
-            color: var(--white);
-            text-decoration: none;
-            transition: opacity 0.3s;
-            font-weight: 500;
-        }
+    .btn-donate {
+      background: linear-gradient(135deg, var(--saffron), var(--pink));
+      color: white; border: none; padding: 10px 24px;
+      border-radius: 50px; font-size: 14px; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      box-shadow: 0 4px 15px rgba(255,107,43,0.4);
+      transition: all 0.3s;
+    }
+    .btn-donate:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255,107,43,0.5);
+    }
 
-        nav a:hover {
-            opacity: 0.8;
-        }
+    /* ─── HERO ─── */
+    #home {
+      min-height: 100vh;
+      position: relative;
+      display: flex; align-items: center;
+      overflow: hidden;
+    }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(45, 90, 45, 0.8), rgba(45, 90, 45, 0.8)), 
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%234a7c4a" width="1200" height="600"/></svg>');
-            background-size: cover;
-            background-position: center;
-            color: var(--white);
-            text-align: center;
-            padding: 6rem 2rem;
-        }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(135deg, rgba(124,58,237,0.85) 0%, rgba(255,107,43,0.75) 50%, rgba(0,194,168,0.8) 100%),
+        url('images/hero/hero-bg.jpg') center/cover no-repeat;
+      z-index: 0;
+    }
 
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 20% 50%, rgba(255,179,71,0.3) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 20%, rgba(244,63,142,0.25) 0%, transparent 50%);
+    }
 
-        .logo-container {
-            margin-bottom: 2rem;
-        }
+    /* Floating blobs */
+    .blob {
+      position: absolute; border-radius: 50%;
+      filter: blur(60px); opacity: 0.4;
+      animation: floatBlob 8s ease-in-out infinite;
+    }
+    .blob-1 { width: 400px; height: 400px; background: var(--gold); top: -100px; right: 10%; animation-delay: 0s; }
+    .blob-2 { width: 300px; height: 300px; background: var(--pink); bottom: -50px; left: 5%; animation-delay: 3s; }
+    .blob-3 { width: 200px; height: 200px; background: var(--teal); top: 40%; right: 25%; animation-delay: 5s; }
 
-        .logo-container img {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-            background: var(--white);
-            padding: 10px;
-        }
+    @keyframes floatBlob {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 0 5%; max-width: 700px;
+      margin-top: 72px;
+      animation: fadeUp 1s ease both;
+    }
 
-        .tagline {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            font-style: italic;
-            opacity: 0.95;
-        }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        .sanskrit-text {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--glass); border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      padding: 8px 16px; border-radius: 50px;
+      color: white; font-size: 13px; font-weight: 500;
+      margin-bottom: 28px;
+      animation: fadeUp 1s ease 0.2s both;
+    }
+    .hero-badge span { opacity: 0.8; }
 
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 900; line-height: 1.1;
+      color: white;
+      margin-bottom: 16px;
+      animation: fadeUp 1s ease 0.3s both;
+    }
+    .hero-title em {
+      font-style: italic;
+      background: linear-gradient(90deg, var(--gold), #fff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
 
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
+    .hero-tagline {
+      font-size: 18px; color: rgba(255,255,255,0.85);
+      margin-bottom: 12px; font-weight: 300; letter-spacing: 0.05em;
+      animation: fadeUp 1s ease 0.4s both;
+    }
+    .hero-sub {
+      font-size: 15px; color: rgba(255,255,255,0.65);
+      margin-bottom: 40px; line-height: 1.7;
+      animation: fadeUp 1s ease 0.5s both;
+    }
 
-        .btn-primary {
-            background: var(--white);
-            color: var(--primary-green);
-        }
+    .hero-ctas {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      animation: fadeUp 1s ease 0.6s both;
+    }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(255,255,255,0.3);
-        }
+    .btn-primary {
+      background: white; color: var(--dark);
+      padding: 14px 32px; border-radius: 50px;
+      font-size: 15px; font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      transition: all 0.3s;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.25); }
 
-        .btn-secondary {
-            background: transparent;
-            color: var(--white);
-            border: 2px solid var(--white);
-        }
+    .btn-outline {
+      background: var(--glass); border: 1.5px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      color: white; padding: 14px 32px; border-radius: 50px;
+      font-size: 15px; font-weight: 500;
+      text-decoration: none; transition: all 0.3s;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.3); transform: translateY(-3px); }
 
-        .btn-secondary:hover {
-            background: var(--white);
-            color: var(--primary-green);
-        }
+    /* Hero glass card - floating stats */
+    .hero-stats-card {
+      position: absolute; right: 5%; top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 24px;
+      padding: 36px 32px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
+      z-index: 2;
+      animation: fadeUp 1s ease 0.7s both;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .stat-item { text-align: center; }
+    .stat-item .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem; font-weight: 900; color: white;
+      display: block;
+    }
+    .stat-item .label {
+      font-size: 11px; color: rgba(255,255,255,0.75);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px;
+    }
+    .stat-divider {
+      grid-column: 1 / -1;
+      height: 1px; background: rgba(255,255,255,0.2);
+      margin: -8px 0;
+    }
 
-        /* Main Content */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+    /* ─── SECTION COMMON ─── */
+    section { padding: 100px 5%; }
 
-        section {
-            padding: 4rem 0;
-        }
+    .section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--saffron);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800; line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .section-sub {
+      font-size: 16px; line-height: 1.8;
+      color: #555; max-width: 540px;
+    }
 
-        h2 {
-            font-size: 2.5rem;
-            color: var(--primary-green);
-            margin-bottom: 1rem;
-            text-align: center;
-        }
+    /* ─── PROGRAMS ─── */
+    #programs {
+      background: white;
+    }
 
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-light);
-            margin-bottom: 3rem;
-            font-size: 1.1rem;
-        }
+    .programs-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 60px; flex-wrap: wrap; gap: 24px;
+    }
 
-        /* Mission Section */
-        .mission-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+    }
 
-        .mission-card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-            text-align: center;
-        }
+    .program-card {
+      border-radius: 20px; overflow: hidden;
+      position: relative; height: 320px;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    }
+    .program-card:hover { transform: translateY(-8px) scale(1.02); }
 
-        .mission-card:hover {
-            transform: translateY(-5px);
-        }
+    .program-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .program-card:hover img { transform: scale(1.08); }
 
-        .mission-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
+    .program-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,16,53,0.92) 0%, rgba(26,16,53,0.3) 50%, transparent 100%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 28px;
+    }
 
-        .mission-card h3 {
-            color: var(--primary-green);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
+    .program-icon {
+      width: 48px; height: 48px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin-bottom: 12px;
+      background: var(--glass); border: 1px solid var(--glass-border);
+      backdrop-filter: blur(8px);
+    }
+    .program-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; color: white; font-weight: 700; margin-bottom: 6px;
+    }
+    .program-card p { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.6; }
 
-        /* About Section */
-        #about {
-            background: var(--white);
-        }
+    .program-tag {
+      position: absolute; top: 20px; right: 20px;
+      padding: 5px 14px; border-radius: 50px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.05em;
+      background: var(--glass); border: 1px solid var(--glass-border);
+      backdrop-filter: blur(8px); color: white;
+    }
 
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            line-height: 1.8;
-        }
+    /* program card accent colors */
+    .program-card:nth-child(1) .program-icon { background: rgba(255,107,43,0.3); }
+    .program-card:nth-child(2) .program-icon { background: rgba(34,197,94,0.3); }
+    .program-card:nth-child(3) .program-icon { background: rgba(0,194,168,0.3); }
+    .program-card:nth-child(4) .program-icon { background: rgba(244,63,142,0.3); }
+    .program-card:nth-child(5) .program-icon { background: rgba(124,58,237,0.3); }
 
-        .about-content p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
+    /* ─── FUNDRAISERS ─── */
+    #fundraisers {
+      background: linear-gradient(160deg, #F8F6FF 0%, #FFF5F0 100%);
+      position: relative; overflow: hidden;
+    }
+    #fundraisers::before {
+      content: '';
+      position: absolute; top: -200px; right: -200px;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,107,43,0.08), transparent 70%);
+    }
 
-        .reg-number {
-            background: var(--cream);
-            padding: 1rem;
-            border-radius: 10px;
-            font-weight: 600;
-            color: var(--primary-green);
-            display: inline-block;
-            margin-top: 1rem;
-        }
+    .fundraisers-header {
+      text-align: center; margin-bottom: 64px;
+    }
+    .fundraisers-header .section-sub { margin: 0 auto; }
 
-        /* Focus Areas */
-        .focus-areas {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
+    .fundraisers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 28px;
+    }
 
-        .focus-item {
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border-left: 4px solid var(--primary-green);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
+    .fundraiser-card {
+      border-radius: 24px; overflow: hidden;
+      position: relative; height: 420px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                  box-shadow 0.4s ease;
+    }
+    .fundraiser-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.18);
+    }
 
-        .focus-item h4 {
-            color: var(--primary-green);
-            margin-bottom: 0.5rem;
-        }
+    .fundraiser-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .fundraiser-card:hover img { transform: scale(1.06); }
 
-        /* Contact Section */
-        #contact {
-            background: var(--white);
-        }
+    .fundraiser-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(10,5,30,0.97) 0%,
+        rgba(10,5,30,0.75) 45%,
+        rgba(10,5,30,0.15) 100%
+      );
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 28px;
+    }
 
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
+    .fundraiser-category {
+      position: absolute; top: 20px; left: 20px;
+      padding: 6px 16px; border-radius: 50px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.25);
+    }
 
-        .contact-card {
-            background: var(--cream);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-        }
+    .fundraiser-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; color: white; font-weight: 700;
+      margin-bottom: 8px; line-height: 1.3;
+    }
+    .fundraiser-card p {
+      font-size: 13px; color: rgba(255,255,255,0.7);
+      line-height: 1.6; margin-bottom: 20px;
+    }
 
-        .contact-icon {
-            font-size: 2.5rem;
-            color: var(--primary-green);
-            margin-bottom: 1rem;
-        }
+    .progress-section { margin-bottom: 16px; }
+    .progress-amounts {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 8px;
+    }
+    .raised-amount {
+      font-size: 1.4rem; font-weight: 700; color: white;
+      font-family: 'Playfair Display', serif;
+    }
+    .raised-amount span { font-size: 14px; color: rgba(255,255,255,0.6); font-family: 'DM Sans'; font-weight: 400; }
+    .goal-amount { font-size: 13px; color: rgba(255,255,255,0.55); }
 
-        .contact-card h3 {
-            color: var(--primary-green);
-            margin-bottom: 0.5rem;
-        }
+    .progress-bar-track {
+      height: 6px; background: rgba(255,255,255,0.15);
+      border-radius: 10px; overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%; border-radius: 10px;
+      transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+      position: relative;
+    }
+    .progress-bar-fill::after {
+      content: ''; position: absolute;
+      right: 0; top: -3px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: inherit;
+      box-shadow: 0 0 8px currentColor;
+    }
 
-        .contact-card a {
-            color: var(--text-dark);
-            text-decoration: none;
-        }
+    .progress-meta {
+      display: flex; justify-content: space-between; margin-top: 6px;
+    }
+    .pct { font-size: 12px; font-weight: 700; }
+    .days-left { font-size: 12px; color: rgba(255,255,255,0.55); }
 
-        .contact-card a:hover {
-            color: var(--primary-green);
-        }
+    .btn-fund {
+      display: block; text-align: center;
+      padding: 12px; border-radius: 14px;
+      font-size: 14px; font-weight: 600;
+      text-decoration: none; color: white;
+      backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.12);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .btn-fund:hover { background: rgba(255,255,255,0.22); }
 
-        /* Footer */
-        footer {
-            background: var(--primary-green);
-            color: var(--white);
-            text-align: center;
-            padding: 2rem;
-        }
+    /* card color themes */
+    .fc-orange .fundraiser-category { background: rgba(255,107,43,0.3); color: var(--gold); }
+    .fc-orange .progress-bar-fill { background: linear-gradient(90deg, var(--gold), var(--saffron)); }
+    .fc-orange .pct { color: var(--gold); }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    .fc-teal .fundraiser-category { background: rgba(0,194,168,0.3); color: #7EFFF5; }
+    .fc-teal .progress-bar-fill { background: linear-gradient(90deg, #00C2A8, #7EFFF5); }
+    .fc-teal .pct { color: #7EFFF5; }
 
-        .social-links {
-            margin: 1rem 0;
-        }
+    .fc-violet .fundraiser-category { background: rgba(124,58,237,0.3); color: #C4B5FD; }
+    .fc-violet .progress-bar-fill { background: linear-gradient(90deg, var(--violet), #C4B5FD); }
+    .fc-violet .pct { color: #C4B5FD; }
 
-        .social-links a {
-            color: var(--white);
-            font-size: 1.5rem;
-            margin: 0 0.5rem;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
+    .fc-pink .fundraiser-category { background: rgba(244,63,142,0.3); color: #FCA5CB; }
+    .fc-pink .progress-bar-fill { background: linear-gradient(90deg, var(--pink), #FCA5CB); }
+    .fc-pink .pct { color: #FCA5CB; }
 
-        .social-links a:hover {
-            opacity: 0.7;
-        }
+    /* ─── GALLERY ─── */
+    #gallery {
+      background: white;
+    }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            nav ul {
-                display: none;
-            }
+    .gallery-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 48px; flex-wrap: wrap; gap: 24px;
+    }
 
-            h1 {
-                font-size: 2rem;
-            }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 260px);
+      gap: 16px;
+    }
+    .gallery-grid .g-item:first-child {
+      grid-row: span 2;
+    }
 
-            .tagline {
-                font-size: 1.1rem;
-            }
+    .g-item {
+      border-radius: 16px; overflow: hidden;
+      position: relative; cursor: pointer;
+    }
+    .g-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .g-item:hover img { transform: scale(1.08); }
+    .g-item::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,16,53,0.5), transparent 50%);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .g-item:hover::after { opacity: 1; }
 
-            .logo-container img {
-                width: 150px;
-                height: 150px;
-            }
+    .gallery-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; font-size: 13px; color: #aaa;
+    }
+    .gallery-placeholder .ph-icon { font-size: 32px; }
 
-            .mission-grid, .contact-info {
-                grid-template-columns: 1fr;
-            }
-        }
+    /* placeholder bg colors */
+    .g-item:nth-child(1) .gallery-placeholder { background: linear-gradient(135deg, #FFE5D8, #FFCBA8); }
+    .g-item:nth-child(2) .gallery-placeholder { background: linear-gradient(135deg, #D8F5EE, #A8ECD8); }
+    .g-item:nth-child(3) .gallery-placeholder { background: linear-gradient(135deg, #E8D8FF, #D0B8FF); }
+    .g-item:nth-child(4) .gallery-placeholder { background: linear-gradient(135deg, #FFD8EC, #FFB8D8); }
+    .g-item:nth-child(5) .gallery-placeholder { background: linear-gradient(135deg, #D8EEFF, #B8D8FF); }
+    .g-item:nth-child(6) .gallery-placeholder { background: linear-gradient(135deg, #FFF5D8, #FFE8A8); }
 
-        /* Animation */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    /* ─── GET INVOLVED ─── */
+    #get-involved {
+      background: linear-gradient(160deg, var(--dark) 0%, #2D1065 100%);
+      position: relative; overflow: hidden;
+    }
+    #get-involved::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
 
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease-out;
-        }
-    </style>
+    .involved-header {
+      text-align: center; margin-bottom: 64px;
+    }
+    .involved-header .section-title { color: white; }
+    .involved-header .section-label { color: var(--gold); }
+    .involved-header .section-sub { color: rgba(255,255,255,0.6); margin: 0 auto; }
+
+    .involved-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; position: relative;
+    }
+
+    .involved-card {
+      border-radius: 24px; padding: 40px 32px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(12px);
+      text-align: center;
+      transition: all 0.4s;
+      position: relative; overflow: hidden;
+    }
+    .involved-card:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-8px);
+      border-color: rgba(255,255,255,0.2);
+    }
+    .involved-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .involved-card:nth-child(1)::before { background: linear-gradient(90deg, var(--saffron), var(--gold)); }
+    .involved-card:nth-child(2)::before { background: linear-gradient(90deg, var(--teal), #7EFFF5); }
+    .involved-card:nth-child(3)::before { background: linear-gradient(90deg, var(--pink), #FCA5CB); }
+
+    .involved-icon {
+      width: 72px; height: 72px; border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px; margin: 0 auto 24px;
+    }
+    .involved-card:nth-child(1) .involved-icon { background: rgba(255,107,43,0.15); }
+    .involved-card:nth-child(2) .involved-icon { background: rgba(0,194,168,0.15); }
+    .involved-card:nth-child(3) .involved-icon { background: rgba(244,63,142,0.15); }
+
+    .involved-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; color: white; margin-bottom: 12px;
+    }
+    .involved-card p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 32px; }
+
+    .btn-involved {
+      display: inline-block; padding: 12px 28px; border-radius: 50px;
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      transition: all 0.3s; cursor: pointer; border: none;
+    }
+    .btn-vol { background: linear-gradient(135deg, var(--saffron), var(--gold)); color: white; }
+    .btn-don { background: linear-gradient(135deg, var(--teal), #7EFFF5); color: var(--dark); }
+    .btn-par { background: linear-gradient(135deg, var(--pink), #FCA5CB); color: white; }
+    .btn-involved:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #0D0820;
+      color: rgba(255,255,255,0.7);
+      padding: 64px 5% 32px;
+    }
+
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; margin-bottom: 48px;
+    }
+
+    .footer-brand {}
+    .footer-brand .logo-area {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+    }
+    .footer-brand img {
+      width: 48px; height: 48px; border-radius: 50%; object-fit: cover;
+      border: 2px solid rgba(255,107,43,0.5);
+    }
+    .footer-brand .brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; font-weight: 700; color: white;
+    }
+    .footer-brand p { font-size: 14px; line-height: 1.8; max-width: 280px; }
+    .footer-brand .reg {
+      margin-top: 20px; font-size: 12px; opacity: 0.5;
+      border: 1px solid rgba(255,255,255,0.1); display: inline-block;
+      padding: 6px 14px; border-radius: 6px;
+    }
+
+    .footer-col h4 {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: white; margin-bottom: 20px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 12px; }
+    .footer-col a {
+      color: rgba(255,255,255,0.55); font-size: 14px; text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--saffron); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 28px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-bottom p { font-size: 13px; }
+    .footer-tagline {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px; font-style: italic; color: var(--gold); opacity: 0.8;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .hero-stats-card { display: none; }
+      .involved-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+      }
+      .gallery-grid .g-item:first-child { grid-row: span 1; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 70px 5%; }
+      .hero-content { padding-top: 20px; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .programs-header, .gallery-header { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* Scroll animations */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav>
-            <div class="logo-text">Mission Sarvmangal Sewa Samiti</div>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#mission">Mission</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content fade-in-up">
-            <div class="logo-container">
-                <img src="Logo.jpg" alt="Mission Sarvmangal Sewa Samiti Logo">
-            </div>
-            <h1>Mission Sarvmangal Sewa Samiti</h1>
-            <p class="sanskrit-text">निस्वार्थ सेवा परमो धर्मः</p>
-            <p class="tagline">Serving Humanity with Compassion and Dedication</p>
-            <div class="cta-buttons">
-                <a href="#about" class="btn btn-primary">Learn More</a>
-                <a href="#contact" class="btn btn-secondary">Get Involved</a>
-            </div>
+  <!-- ─── NAVBAR ─── -->
+  <nav>
+    <a href="#home" class="nav-logo">
+      <img src="Logo.jpg" alt="Sarvmangal Logo" onerror="this.style.display='none'"/>
+      <div class="nav-logo-text">
+        <span>Mission Sarvmangal</span>
+        <span>Sewa Samiti</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#fundraisers">Fundraisers</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#get-involved">Get Involved</a></li>
+    </ul>
+    <a href="#" class="btn-donate">Donate Now</a>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section id="home">
+    <div class="hero-bg">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span>🌸</span>
+        <span>Reg. No: UK0640882025015186</span>
+      </div>
+      <h1 class="hero-title">
+        Serving Every <em>Soul</em> with Compassion
+      </h1>
+      <p class="hero-tagline">निस्वार्थ सेवा परमो धर्मः</p>
+      <p class="hero-sub">
+        Mission Sarvmangal Sewa Samiti is committed to uplifting communities through education, healthcare, rural development, and animal welfare — one selfless act at a time.
+      </p>
+      <div class="hero-ctas">
+        <a href="#fundraisers" class="btn-primary">Support a Cause</a>
+        <a href="#programs" class="btn-outline">Our Programs →</a>
+      </div>
+    </div>
+
+    <div class="hero-stats-card">
+      <div class="stat-item">
+        <span class="num">500+</span>
+        <span class="label">Families Served</span>
+      </div>
+      <div class="stat-item">
+        <span class="num">3</span>
+        <span class="label">Districts</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="num">4</span>
+        <span class="label">Active Programs</span>
+      </div>
+      <div class="stat-item">
+        <span class="num">2025</span>
+        <span class="label">Est. Year</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── OUR PROGRAMS ─── -->
+  <section id="programs">
+    <div class="programs-header">
+      <div>
+        <p class="section-label reveal">What We Do</p>
+        <h2 class="section-title reveal reveal-delay-1">Our Programs &<br/>Focus Areas</h2>
+      </div>
+      <p class="section-sub reveal reveal-delay-2">
+        Each program is rooted in the belief that every human being deserves dignity, opportunity, and care.
+      </p>
+    </div>
+
+    <div class="programs-grid">
+      <div class="program-card reveal">
+        <img src="images/programs/education.jpg" alt="Education"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div style="display:none; width:100%; height:100%; background:linear-gradient(135deg,#FFE5D8,#FFCBA8); align-items:center; justify-content:center; font-size:80px;">📚</div>
+        <div class="program-overlay">
+          <div class="program-icon">📚</div>
+          <h3>Education</h3>
+          <p>Empowering communities through knowledge, literacy, and skill development programs.</p>
         </div>
-    </section>
+        <span class="program-tag">Core</span>
+      </div>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <h2>About Us</h2>
-            <div class="about-content">
-                <p>Mission Sarvmangal Sewa Samiti is a dedicated non-governmental organization committed to serving the community through selfless service and compassion. Guided by the principle of "निस्वार्थ सेवा परमो धर्मः" (Selfless Service is the Supreme Duty), we work tirelessly to create positive change in society.</p>
-                
-                <p>Our organization embodies the values of knowledge, growth, community service, and care for all living beings. Through our integrated approach, we strive to uplift communities and create lasting impact in the lives of those we serve.</p>
-                
-                <div class="reg-number">
-                    Registered Organization | Reg. No: UK0640882025015186
-                </div>
-            </div>
+      <div class="program-card reveal reveal-delay-1">
+        <img src="images/programs/healthcare.jpg" alt="Healthcare"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div style="display:none; width:100%; height:100%; background:linear-gradient(135deg,#D8F5EE,#A8ECD8); align-items:center; justify-content:center; font-size:80px;">🏥</div>
+        <div class="program-overlay">
+          <div class="program-icon">🏥</div>
+          <h3>Healthcare</h3>
+          <p>Providing healthcare support and medical camps to underserved rural communities.</p>
         </div>
-    </section>
+        <span class="program-tag">Active</span>
+      </div>
 
-    <!-- Mission Section -->
-    <section id="mission">
-        <div class="container">
-            <h2>Our Mission</h2>
-            <p class="section-subtitle">Building a better tomorrow through service and compassion</p>
-            
-            <div class="mission-grid">
-                <div class="mission-card">
-                    <div class="mission-icon">📚</div>
-                    <h3>Education</h3>
-                    <p>Promoting knowledge and learning opportunities for all, empowering communities through education and skill development.</p>
-                </div>
-                
-                <div class="mission-card">
-                    <div class="mission-icon">🌱</div>
-                    <h3>Growth & Development</h3>
-                    <p>Fostering sustainable growth and holistic development in communities through various initiatives and programs.</p>
-                </div>
-                
-                <div class="mission-card">
-                    <div class="mission-icon">🤝</div>
-                    <h3>Community Service</h3>
-                    <p>Engaging in selfless service to strengthen community bonds and create positive social impact.</p>
-                </div>
-                
-                <div class="mission-card">
-                    <div class="mission-icon">🐄</div>
-                    <h3>Animal Welfare</h3>
-                    <p>Caring for and protecting animals, recognizing their importance in our ecosystem and culture.</p>
-                </div>
-            </div>
-
-            <div class="focus-areas" style="margin-top: 3rem;">
-                <h2 style="grid-column: 1 / -1; margin-bottom: 1rem;">Our Focus Areas</h2>
-                <div class="focus-item">
-                    <h4>📖 Educational Programs</h4>
-                    <p>Supporting education initiatives and literacy programs</p>
-                </div>
-                <div class="focus-item">
-                    <h4>🏥 Healthcare Services</h4>
-                    <p>Providing healthcare support to underserved communities</p>
-                </div>
-                <div class="focus-item">
-                    <h4>🌾 Rural Development</h4>
-                    <p>Empowering rural communities through sustainable programs</p>
-                </div>
-                <div class="focus-item">
-                    <h4>🌳 Environmental Care</h4>
-                    <p>Promoting environmental conservation and sustainability</p>
-                </div>
-            </div>
+      <div class="program-card reveal reveal-delay-2">
+        <img src="images/programs/rural.jpg" alt="Rural Development"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div style="display:none; width:100%; height:100%; background:linear-gradient(135deg,#D8F5EE,#C8F0C0); align-items:center; justify-content:center; font-size:80px;">🌾</div>
+        <div class="program-overlay">
+          <div class="program-icon">🌾</div>
+          <h3>Rural Development</h3>
+          <p>Sustainable initiatives to empower villages with infrastructure, livelihoods, and resources.</p>
         </div>
-    </section>
+        <span class="program-tag">Ongoing</span>
+      </div>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <h2>Get In Touch</h2>
-            <p class="section-subtitle">Join us in our mission to serve and make a difference</p>
-            
-            <div class="contact-info">
-                <div class="contact-card">
-                    <div class="contact-icon">📧</div>
-                    <h3>Email Us</h3>
-                    <p><a href="mailto:contact@sarvmangalsewa.org">contact@sarvmangalsewa.org</a></p>
-                </div>
-                
-                <div class="contact-card">
-                    <div class="contact-icon">🌐</div>
-                    <h3>Visit Us</h3>
-                    <p><a href="https://sarvmangalsewa.org">www.sarvmangalsewa.org</a></p>
-                </div>
-                
-                <div class="contact-card">
-                    <div class="contact-icon">🤲</div>
-                    <h3>Get Involved</h3>
-                    <p>Volunteer or support our initiatives</p>
-                </div>
+      <div class="program-card reveal reveal-delay-3">
+        <img src="images/programs/animal.jpg" alt="Animal Welfare"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div style="display:none; width:100%; height:100%; background:linear-gradient(135deg,#FFD8EC,#FFB8D8); align-items:center; justify-content:center; font-size:80px;">🐄</div>
+        <div class="program-overlay">
+          <div class="program-icon">🐄</div>
+          <h3>Animal Welfare</h3>
+          <p>Protecting and caring for animals, honouring their sacred role in our culture and ecosystem.</p>
+        </div>
+        <span class="program-tag">Core</span>
+      </div>
+
+      <div class="program-card reveal reveal-delay-4">
+        <img src="images/programs/environment.jpg" alt="Environment"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div style="display:none; width:100%; height:100%; background:linear-gradient(135deg,#D8EEFF,#B8D8FF); align-items:center; justify-content:center; font-size:80px;">🌳</div>
+        <div class="program-overlay">
+          <div class="program-icon">🌳</div>
+          <h3>Environment</h3>
+          <p>Promoting conservation, tree planting, and environmental sustainability for future generations.</p>
+        </div>
+        <span class="program-tag">New</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FUNDRAISERS ─── -->
+  <section id="fundraisers">
+    <div class="fundraisers-header">
+      <p class="section-label reveal">Active Campaigns</p>
+      <h2 class="section-title reveal reveal-delay-1">Support Our Missions</h2>
+      <p class="section-sub reveal reveal-delay-2">Every rupee you contribute directly funds these active on-ground missions. Watch the progress grow with your support.</p>
+    </div>
+
+    <div class="fundraisers-grid">
+
+      <!-- Card 1 -->
+      <div class="fundraiser-card fc-orange reveal">
+        <img src="images/fundraisers/education-fund.jpg" alt="Education Fund"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"/>
+        <div style="display:none; width:100%; height:100%; background:linear-gradient(135deg,#FF6B2B,#FFB347);"></div>
+        <div class="fundraiser-overlay">
+          <span class="fundraiser-category">Education</span>
+          <h3>Books & Stationery for 200 Children</h3>
+          <p>Help us provide school supplies, textbooks, and uniforms to underprivileged children in Uttarakhand villages.</p>
+          <div class="progress-section">
+            <div class="progress-amounts">
+              <div class="raised-amount">₹45,000 <span>raised</span></div>
+              <div class="goal-amount">Goal: ₹1,00,000</div>
             </div>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" style="width: 45%;"></div>
+            </div>
+            <div class="progress-meta">
+              <span class="pct">45% funded</span>
+              <span class="days-left">38 days left</span>
+            </div>
+          </div>
+          <a href="#" class="btn-fund">Donate to This Mission →</a>
         </div>
-    </section>
+      </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2025 Mission Sarvmangal Sewa Samiti. All rights reserved.</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Reg. No: UK0640882025015186</p>
-            <p style="margin-top: 1rem; font-style: italic;">निस्वार्थ सेवा परमो धर्मः</p>
+      <!-- Card 2 -->
+      <div class="fundraiser-card fc-teal reveal reveal-delay-1">
+        <img src="images/fundraisers/healthcare-fund.jpg" alt="Healthcare Fund"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"/>
+        <div style="display:none; width:100%; height:100%; background:linear-gradient(135deg,#00C2A8,#7EFFF5);"></div>
+        <div class="fundraiser-overlay">
+          <span class="fundraiser-category">Healthcare</span>
+          <h3>Free Medical Camp — 3 Villages</h3>
+          <p>Fund medicines, diagnostic equipment, and doctors' fees for free healthcare camps across three rural villages.</p>
+          <div class="progress-section">
+            <div class="progress-amounts">
+              <div class="raised-amount">₹28,500 <span>raised</span></div>
+              <div class="goal-amount">Goal: ₹75,000</div>
+            </div>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" style="width: 38%;"></div>
+            </div>
+            <div class="progress-meta">
+              <span class="pct">38% funded</span>
+              <span class="days-left">52 days left</span>
+            </div>
+          </div>
+          <a href="#" class="btn-fund">Donate to This Mission →</a>
         </div>
-    </footer>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="fundraiser-card fc-violet reveal reveal-delay-2">
+        <img src="images/fundraisers/animal-fund.jpg" alt="Animal Welfare Fund"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"/>
+        <div style="display:none; width:100%; height:100%; background:linear-gradient(135deg,#7C3AED,#C4B5FD);"></div>
+        <div class="fundraiser-overlay">
+          <span class="fundraiser-category">Animal Welfare</span>
+          <h3>Gaushala Renovation & Feed Drive</h3>
+          <p>Support renovation of the local gaushala and provide feed for over 80 cows and stray animals this winter.</p>
+          <div class="progress-section">
+            <div class="progress-amounts">
+              <div class="raised-amount">₹62,000 <span>raised</span></div>
+              <div class="goal-amount">Goal: ₹1,50,000</div>
+            </div>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" style="width: 41%;"></div>
+            </div>
+            <div class="progress-meta">
+              <span class="pct">41% funded</span>
+              <span class="days-left">24 days left</span>
+            </div>
+          </div>
+          <a href="#" class="btn-fund">Donate to This Mission →</a>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="fundraiser-card fc-pink reveal reveal-delay-3">
+        <img src="images/fundraisers/environment-fund.jpg" alt="Environment Fund"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"/>
+        <div style="display:none; width:100%; height:100%; background:linear-gradient(135deg,#F43F8E,#FCA5CB);"></div>
+        <div class="fundraiser-overlay">
+          <span class="fundraiser-category">Environment</span>
+          <h3>Plant 1000 Trees — Monsoon Drive</h3>
+          <p>Help us purchase saplings, tools, and community training kits for our upcoming mass tree-planting campaign.</p>
+          <div class="progress-section">
+            <div class="progress-amounts">
+              <div class="raised-amount">₹18,000 <span>raised</span></div>
+              <div class="goal-amount">Goal: ₹50,000</div>
+            </div>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" style="width: 36%;"></div>
+            </div>
+            <div class="progress-meta">
+              <span class="pct">36% funded</span>
+              <span class="days-left">60 days left</span>
+            </div>
+          </div>
+          <a href="#" class="btn-fund">Donate to This Mission →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── GALLERY ─── -->
+  <section id="gallery">
+    <div class="gallery-header">
+      <div>
+        <p class="section-label reveal">Our Impact</p>
+        <h2 class="section-title reveal reveal-delay-1">Moments from<br/>the Ground</h2>
+      </div>
+      <p class="section-sub reveal reveal-delay-2">Real moments, real people. Every photo tells the story of a community transformed.</p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="g-item reveal">
+        <img src="images/gallery/gallery-1.jpg" alt="Gallery 1"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="gallery-placeholder"><span class="ph-icon">🖼️</span><span>gallery-1.jpg</span></div>
+      </div>
+      <div class="g-item reveal reveal-delay-1">
+        <img src="images/gallery/gallery-2.jpg" alt="Gallery 2"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="gallery-placeholder"><span class="ph-icon">🖼️</span><span>gallery-2.jpg</span></div>
+      </div>
+      <div class="g-item reveal reveal-delay-2">
+        <img src="images/gallery/gallery-3.jpg" alt="Gallery 3"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="gallery-placeholder"><span class="ph-icon">🖼️</span><span>gallery-3.jpg</span></div>
+      </div>
+      <div class="g-item reveal reveal-delay-1">
+        <img src="images/gallery/gallery-4.jpg" alt="Gallery 4"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="gallery-placeholder"><span class="ph-icon">🖼️</span><span>gallery-4.jpg</span></div>
+      </div>
+      <div class="g-item reveal reveal-delay-2">
+        <img src="images/gallery/gallery-5.jpg" alt="Gallery 5"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="gallery-placeholder"><span class="ph-icon">🖼️</span><span>gallery-5.jpg</span></div>
+      </div>
+      <div class="g-item reveal reveal-delay-3">
+        <img src="images/gallery/gallery-6.jpg" alt="Gallery 6"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="gallery-placeholder"><span class="ph-icon">🖼️</span><span>gallery-6.jpg</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── GET INVOLVED ─── -->
+  <section id="get-involved">
+    <div class="involved-header">
+      <p class="section-label reveal">Join Us</p>
+      <h2 class="section-title reveal reveal-delay-1">Be Part of the Change</h2>
+      <p class="section-sub reveal reveal-delay-2">There are many ways to contribute. Choose what resonates with your heart and make a difference today.</p>
+    </div>
+
+    <div class="involved-grid">
+      <div class="involved-card reveal">
+        <div class="involved-icon">🤝</div>
+        <h3>Volunteer</h3>
+        <p>Give your time and skills. Join our on-ground teams for medical camps, education drives, and community events.</p>
+        <a href="mailto:contact@sarvmangalsewa.org" class="btn-involved btn-vol">Join as Volunteer</a>
+      </div>
+      <div class="involved-card reveal reveal-delay-1">
+        <div class="involved-icon">💛</div>
+        <h3>Donate</h3>
+        <p>Every rupee matters. Your donation directly funds education, healthcare, animal welfare, and environmental programs.</p>
+        <a href="#fundraisers" class="btn-involved btn-don">Donate Now</a>
+      </div>
+      <div class="involved-card reveal reveal-delay-2">
+        <div class="involved-icon">🌐</div>
+        <h3>Partner</h3>
+        <p>CSR partnerships, institutional collaborations, and NGO alliances are welcome. Let's multiply our impact together.</p>
+        <a href="mailto:contact@sarvmangalsewa.org" class="btn-involved btn-par">Partner With Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-area">
+          <img src="Logo.jpg" alt="Logo" onerror="this.style.display='none'"/>
+          <span class="brand-name">Mission Sarvmangal Sewa Samiti</span>
+        </div>
+        <p>Guided by the principle of selfless service, we work tirelessly to create positive, lasting change across communities in Uttarakhand and beyond.</p>
+        <span class="reg">Reg. No: UK0640882025015186</span>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#programs">Our Programs</a></li>
+          <li><a href="#fundraisers">Fundraisers</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#get-involved">Get Involved</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="#">Education</a></li>
+          <li><a href="#">Healthcare</a></li>
+          <li><a href="#">Rural Development</a></li>
+          <li><a href="#">Animal Welfare</a></li>
+          <li><a href="#">Environment</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@sarvmangalsewa.org">contact@sarvmangalsewa.org</a></li>
+          <li><a href="https://sarvmangalsewa.org">www.sarvmangalsewa.org</a></li>
+          <li><a href="#">Uttarakhand, India</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Mission Sarvmangal Sewa Samiti. All rights reserved.</p>
+      <span class="footer-tagline">निस्वार्थ सेवा परमो धर्मः</span>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(r => observer.observe(r));
+
+    // Navbar scroll effect
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        nav.style.background = 'rgba(255,255,255,0.92)';
+        nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.1)';
+      } else {
+        nav.style.background = 'rgba(255,255,255,0.72)';
+        nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.06)';
+      }
+    });
+
+    // Animate progress bars on scroll
+    const progressFills = document.querySelectorAll('.progress-bar-fill');
+    const progressObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const fill = e.target;
+          const targetWidth = fill.style.width;
+          fill.style.width = '0%';
+          setTimeout(() => { fill.style.width = targetWidth; }, 200);
+          progressObserver.unobserve(fill);
+        }
+      });
+    }, { threshold: 0.5 });
+    progressFills.forEach(f => progressObserver.observe(f));
+  </script>
 </body>
 </html>
