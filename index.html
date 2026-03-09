@@ -286,13 +286,13 @@
     .program-card:hover { transform: translateY(-8px) scale(1.02); }
 
     .program-card img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.5s ease;
+      position:absolute; inset:0; width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s ease; z-index:1;
     }
     .program-card:hover img { transform: scale(1.08); }
 
     .program-overlay {
-      position: absolute; inset: 0;
+      position: absolute; inset: 0; z-index:2;
       background: linear-gradient(to top, rgba(26,16,53,0.92) 0%, rgba(26,16,53,0.3) 50%, transparent 100%);
       display: flex; flex-direction: column; justify-content: flex-end;
       padding: 28px;
@@ -312,7 +312,7 @@
     .program-card p { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.6; }
 
     .program-tag {
-      position: absolute; top: 20px; right: 20px;
+      position: absolute; top: 20px; right: 20px; z-index:3;
       padding: 5px 14px; border-radius: 50px;
       font-size: 11px; font-weight: 600; letter-spacing: 0.05em;
       background: var(--glass); border: 1px solid var(--glass-border);
@@ -363,13 +363,13 @@
     }
 
     .fundraiser-card img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.6s ease;
+      position:absolute; inset:0; width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s ease; z-index:1;
     }
     .fundraiser-card:hover img { transform: scale(1.06); }
 
     .fundraiser-overlay {
-      position: absolute; inset: 0;
+      position: absolute; inset: 0; z-index:2;
       background: linear-gradient(
         to top,
         rgba(10,5,30,0.97) 0%,
@@ -757,7 +757,7 @@
       <div class="program-card reveal">
         <img src="programs/education.jpg" alt="Education"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
-        <div style="display:none; width:100%; height:100%; background:linear-gradient(135deg,#FFE5D8,#FFCBA8); align-items:center; justify-content:center; font-size:80px;">📚</div>
+        <div style="position:absolute;inset:0;display:flex;width:100%;height:100%;background:linear-gradient(135deg,#FFE5D8,#FFCBA8);align-items:center;justify-content:center;font-size:80px;z-index:0;">📚</div>
         <div class="program-overlay">
           <div class="program-icon">📚</div>
           <h3>Education</h3>
@@ -769,7 +769,7 @@
       <div class="program-card reveal reveal-delay-1">
         <img src="programs/healthcare.jpg" alt="Healthcare"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
-        <div style="display:none; width:100%; height:100%; background:linear-gradient(135deg,#D8F5EE,#A8ECD8); align-items:center; justify-content:center; font-size:80px;">🏥</div>
+        <div style="position:absolute;inset:0;display:flex;width:100%;height:100%;background:linear-gradient(135deg,#D8F5EE,#A8ECD8);align-items:center;justify-content:center;font-size:80px;z-index:0;">🏥</div>
         <div class="program-overlay">
           <div class="program-icon">🏥</div>
           <h3>Healthcare</h3>
@@ -781,7 +781,7 @@
       <div class="program-card reveal reveal-delay-2">
         <img src="programs/rural.jpg" alt="Rural Development"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
-        <div style="display:none; width:100%; height:100%; background:linear-gradient(135deg,#D8F5EE,#C8F0C0); align-items:center; justify-content:center; font-size:80px;">🌾</div>
+        <div style="position:absolute;inset:0;display:flex;width:100%;height:100%;background:linear-gradient(135deg,#D8F5EE,#C8F0C0);align-items:center;justify-content:center;font-size:80px;z-index:0;">🌾</div>
         <div class="program-overlay">
           <div class="program-icon">🌾</div>
           <h3>Rural Development</h3>
@@ -793,7 +793,7 @@
       <div class="program-card reveal reveal-delay-3">
         <img src="programs/animal.jpg" alt="Animal Welfare"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
-        <div style="display:none; width:100%; height:100%; background:linear-gradient(135deg,#FFD8EC,#FFB8D8); align-items:center; justify-content:center; font-size:80px;">🐄</div>
+        <div style="position:absolute;inset:0;display:flex;width:100%;height:100%;background:linear-gradient(135deg,#FFD8EC,#FFB8D8);align-items:center;justify-content:center;font-size:80px;z-index:0;">🐄</div>
         <div class="program-overlay">
           <div class="program-icon">🐄</div>
           <h3>Animal Welfare</h3>
@@ -805,7 +805,7 @@
       <div class="program-card reveal reveal-delay-4">
         <img src="programs/environment.jpg" alt="Environment"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
-        <div style="display:none; width:100%; height:100%; background:linear-gradient(135deg,#D8EEFF,#B8D8FF); align-items:center; justify-content:center; font-size:80px;">🌳</div>
+        <div style="position:absolute;inset:0;display:flex;width:100%;height:100%;background:linear-gradient(135deg,#D8EEFF,#B8D8FF);align-items:center;justify-content:center;font-size:80px;z-index:0;">🌳</div>
         <div class="program-overlay">
           <div class="program-icon">🌳</div>
           <h3>Environment</h3>
@@ -830,7 +830,7 @@
       <div class="fundraiser-card fc-orange reveal">
         <img src="fundraisers/education-fund.jpg" alt="Education Fund"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"/>
-        <div style="display:none; width:100%; height:100%; background:linear-gradient(135deg,#FF6B2B,#FFB347);"></div>
+        <div style="position:absolute;inset:0;width:100%;height:100%;background:linear-gradient(135deg,#FF6B2B,#FFB347);z-index:0;"></div>
         <div class="fundraiser-overlay">
           <span class="fundraiser-category">Education</span>
           <h3>Books & Stationery for 200 Children</h3>
@@ -856,7 +856,7 @@
       <div class="fundraiser-card fc-teal reveal reveal-delay-1">
         <img src="fundraisers/healthcare-fund.jpg" alt="Healthcare Fund"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"/>
-        <div style="display:none; width:100%; height:100%; background:linear-gradient(135deg,#00C2A8,#7EFFF5);"></div>
+        <div style="position:absolute;inset:0;width:100%;height:100%;background:linear-gradient(135deg,#00C2A8,#7EFFF5);z-index:0;"></div>
         <div class="fundraiser-overlay">
           <span class="fundraiser-category">Healthcare</span>
           <h3>Free Medical Camp — 3 Villages</h3>
@@ -882,7 +882,7 @@
       <div class="fundraiser-card fc-violet reveal reveal-delay-2">
         <img src="fundraisers/animal-fund.jpg" alt="Animal Welfare Fund"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"/>
-        <div style="display:none; width:100%; height:100%; background:linear-gradient(135deg,#7C3AED,#C4B5FD);"></div>
+        <div style="position:absolute;inset:0;width:100%;height:100%;background:linear-gradient(135deg,#7C3AED,#C4B5FD);z-index:0;"></div>
         <div class="fundraiser-overlay">
           <span class="fundraiser-category">Animal Welfare</span>
           <h3>Gaushala Renovation & Feed Drive</h3>
@@ -908,7 +908,7 @@
       <div class="fundraiser-card fc-pink reveal reveal-delay-3">
         <img src="fundraisers/environment-fund.jpg" alt="Environment Fund"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"/>
-        <div style="display:none; width:100%; height:100%; background:linear-gradient(135deg,#F43F8E,#FCA5CB);"></div>
+        <div style="position:absolute;inset:0;width:100%;height:100%;background:linear-gradient(135deg,#F43F8E,#FCA5CB);z-index:0;"></div>
         <div class="fundraiser-overlay">
           <span class="fundraiser-category">Environment</span>
           <h3>Plant 1000 Trees — Monsoon Drive</h3>
@@ -990,7 +990,7 @@
         <div class="involved-icon">🤝</div>
         <h3>Volunteer</h3>
         <p>Give your time and skills. Join our on-ground teams for medical camps, education drives, and community events.</p>
-        <a href="/cdn-cgi/l/email-protection#395a56574d585a4d794a584b4f5458575e58554a5c4e5817564b5e" class="btn-involved btn-vol">Join as Volunteer</a>
+        <a href="mailto:contact@sarvmangalsewa.org" class="btn-involved btn-vol">Join as Volunteer</a>
       </div>
       <div class="involved-card reveal reveal-delay-1">
         <div class="involved-icon">💛</div>
@@ -1002,7 +1002,7 @@
         <div class="involved-icon">🌐</div>
         <h3>Partner</h3>
         <p>CSR partnerships, institutional collaborations, and NGO alliances are welcome. Let's multiply our impact together.</p>
-        <a href="/cdn-cgi/l/email-protection#0d6e6263796c6e794d7e6c7f7b606c636a6c617e687a6c23627f6a" class="btn-involved btn-par">Partner With Us</a>
+        <a href="mailto:contact@sarvmangalsewa.org" class="btn-involved btn-par">Partner With Us</a>
       </div>
     </div>
   </section>
@@ -1044,7 +1044,7 @@
       <div class="footer-col">
         <h4>Contact</h4>
         <ul>
-          <li><a href="/cdn-cgi/l/email-protection#64070b0a10050710241705161209050a030508170113054a0b1603"><span class="__cf_email__" data-cfemail="e0838f8e94818394a0938192968d818e87818c93859781ce8f9287">[email&#160;protected]</span></a></li>
+          <li><a href="mailto:contact@sarvmangalsewa.org">contact@sarvmangalsewa.org</a></li>
           <li><a href="https://sarvmangalsewa.org">www.sarvmangalsewa.org</a></li>
           <li><a href="#">Uttarakhand, India</a></li>
         </ul>
@@ -1057,7 +1057,7 @@
     </div>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
@@ -1084,4 +1084,15 @@
     const progressObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
-          co
+          const fill = e.target;
+          const targetWidth = fill.style.width;
+          fill.style.width = '0%';
+          setTimeout(() => { fill.style.width = targetWidth; }, 200);
+          progressObserver.unobserve(fill);
+        }
+      });
+    }, { threshold: 0.5 });
+    progressFills.forEach(f => progressObserver.observe(f));
+  </script>
+</body>
+</html>
