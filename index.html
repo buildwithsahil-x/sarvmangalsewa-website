@@ -494,6 +494,7 @@
     .g-item:hover img { transform: scale(1.08); }
     .g-item::after {
       content: ''; position: absolute; inset: 0;
+      pointer-events: none;
       background: linear-gradient(to top, rgba(26,16,53,0.5), transparent 50%);
       opacity: 0; transition: opacity 0.3s;
     }
@@ -523,7 +524,7 @@
     }
     .g-item-video {
       width: 100%; max-width: 340px;
-      display: flex; justify-content: center;
+      display: flex; flex-direction: column; align-items: center;
       cursor: default; background: #fff;
       border-radius: 20px; overflow: hidden;
       border: 1px solid rgba(0,0,0,0.06);
@@ -541,6 +542,40 @@
       border-radius: 0 !important;
       border: 0 !important;
     }
+    .video-watch-link {
+      display: block; width: 100%; box-sizing: border-box;
+      text-align: center; padding: 12px;
+      font-size: 14px; font-weight: 600;
+      text-decoration: none; color: var(--dark);
+      background: rgba(255,179,71,0.15);
+      border-top: 1px solid rgba(0,0,0,0.06);
+      transition: background 0.3s;
+    }
+    .video-watch-link:hover { background: rgba(255,179,71,0.28); }
+
+    /* ─── LIGHTBOX ─── */
+    .lightbox {
+      display: none;
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(10,6,26,0.92);
+      align-items: center; justify-content: center;
+      padding: 40px;
+      cursor: zoom-out;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 100%; max-height: 100%;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      cursor: default;
+    }
+    .lightbox-close {
+      position: absolute; top: 24px; right: 32px;
+      font-size: 36px; color: #fff; line-height: 1;
+      cursor: pointer; opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    .lightbox-close:hover { opacity: 1; }
 
     /* ─── GET INVOLVED ─── */
     #get-involved {
@@ -1060,6 +1095,11 @@
     </div>
   </footer>
 
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="Full size gallery photo"/>
+  </div>
+
   <script>
     // Build the gallery grid from gallery/photos.txt (one filename per line)
     // and links.txt (one Instagram post/reel URL per line). Add or remove
@@ -1082,7 +1122,19 @@
         '<img src="gallery/' + filename + '" alt="Gallery photo ' + (index + 1) + '"' +
         ' onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\'"/>' +
         '<div class="gallery-placeholder"><span class="ph-icon">🖼️</span><span>' + filename + '</span></div>';
+      const img = item.querySelector('img');
+      img.addEventListener('click', () => openLightbox(img.src));
       return item;
+    }
+
+    function openLightbox(src) {
+      const lightbox = document.getElementById('lightbox');
+      document.getElementById('lightbox-img').src = src;
+      lightbox.classList.add('open');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
     }
 
     function makeVideoItem(url) {
@@ -1091,7 +1143,8 @@
       item.innerHTML =
         '<blockquote class="instagram-media" data-instgrm-permalink="' + url + '" data-instgrm-version="14"' +
         ' style="background:#FFF; border:0; border-radius:16px; margin:0 auto; max-width:340px; width:100%;">' +
-        '<a href="' + url + '" target="_blank" rel="noopener">View this reel on Instagram</a></blockquote>';
+        '<a href="' + url + '" target="_blank" rel="noopener">View this reel on Instagram</a></blockquote>' +
+        '<a class="video-watch-link" href="' + url + '" target="_blank" rel="noopener">Watch on Instagram ↗</a>';
       return item;
     }
 
@@ -1118,6 +1171,15 @@
 
     (async function init() {
       await buildGallery();
+
+      // Lightbox close handlers
+      document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+      document.getElementById('lightbox').addEventListener('click', (e) => {
+        if (e.target.id === 'lightbox') closeLightbox();
+      });
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeLightbox();
+      });
 
       // Scroll reveal
       const reveals = document.querySelectorAll('.reveal');
