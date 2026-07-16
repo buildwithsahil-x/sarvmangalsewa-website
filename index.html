@@ -476,7 +476,7 @@
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(2, 260px);
+      grid-auto-rows: 260px;
       gap: 16px;
     }
     .gallery-grid .g-item:first-child {
@@ -506,13 +506,41 @@
     }
     .gallery-placeholder .ph-icon { font-size: 32px; }
 
-    /* placeholder bg colors */
-    .g-item:nth-child(1) .gallery-placeholder { background: linear-gradient(135deg, #FFE5D8, #FFCBA8); }
-    .g-item:nth-child(2) .gallery-placeholder { background: linear-gradient(135deg, #D8F5EE, #A8ECD8); }
-    .g-item:nth-child(3) .gallery-placeholder { background: linear-gradient(135deg, #E8D8FF, #D0B8FF); }
-    .g-item:nth-child(4) .gallery-placeholder { background: linear-gradient(135deg, #FFD8EC, #FFB8D8); }
-    .g-item:nth-child(5) .gallery-placeholder { background: linear-gradient(135deg, #D8EEFF, #B8D8FF); }
-    .g-item:nth-child(6) .gallery-placeholder { background: linear-gradient(135deg, #FFF5D8, #FFE8A8); }
+    /* placeholder bg colors, cycling every 6 items */
+    .g-item:nth-child(6n+1) .gallery-placeholder { background: linear-gradient(135deg, #FFE5D8, #FFCBA8); }
+    .g-item:nth-child(6n+2) .gallery-placeholder { background: linear-gradient(135deg, #D8F5EE, #A8ECD8); }
+    .g-item:nth-child(6n+3) .gallery-placeholder { background: linear-gradient(135deg, #E8D8FF, #D0B8FF); }
+    .g-item:nth-child(6n+4) .gallery-placeholder { background: linear-gradient(135deg, #FFD8EC, #FFB8D8); }
+    .g-item:nth-child(6n+5) .gallery-placeholder { background: linear-gradient(135deg, #D8EEFF, #B8D8FF); }
+    .g-item:nth-child(6n+6) .gallery-placeholder { background: linear-gradient(135deg, #FFF5D8, #FFE8A8); }
+
+    .video-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .g-item-video {
+      width: 100%; max-width: 340px;
+      display: flex; justify-content: center;
+      cursor: default; background: #fff;
+      border-radius: 20px; overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                  box-shadow 0.4s ease;
+    }
+    .g-item-video:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.18);
+    }
+    .g-item-video::after { display: none; }
+    .g-item-video .instagram-media {
+      margin: 0 auto !important;
+      border-radius: 0 !important;
+      border: 0 !important;
+    }
 
     /* ─── GET INVOLVED ─── */
     #get-involved {
@@ -708,7 +736,7 @@
         <span>Reg. No: UK0640882025015186</span>
       </div>
       <h1 class="hero-title">
-        Serving <em>Soul</em> with Compassion
+        Serving Every <em>Soul</em> with Compassion
       </h1>
       <p class="hero-tagline">निस्वार्थ सेवा परमो धर्मः</p>
       <p class="hero-sub">
@@ -943,37 +971,12 @@
       <p class="section-sub reveal reveal-delay-2">Real moments, real people. Every photo tells the story of a community transformed.</p>
     </div>
 
-    <div class="gallery-grid">
-      <div class="g-item reveal">
-        <img src="gallery/gallery-1.jpg" alt="Gallery 1"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
-        <div class="gallery-placeholder"><span class="ph-icon">🖼️</span><span>gallery-1.jpg</span></div>
-      </div>
-      <div class="g-item reveal reveal-delay-1">
-        <img src="gallery/gallery-2.jpg" alt="Gallery 2"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
-        <div class="gallery-placeholder"><span class="ph-icon">🖼️</span><span>gallery-2.jpg</span></div>
-      </div>
-      <div class="g-item reveal reveal-delay-2">
-        <img src="gallery/gallery-3.jpg" alt="Gallery 3"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
-        <div class="gallery-placeholder"><span class="ph-icon">🖼️</span><span>gallery-3.jpg</span></div>
-      </div>
-      <div class="g-item reveal reveal-delay-1">
-        <img src="gallery/gallery-4.jpg" alt="Gallery 4"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
-        <div class="gallery-placeholder"><span class="ph-icon">🖼️</span><span>gallery-4.jpg</span></div>
-      </div>
-      <div class="g-item reveal reveal-delay-2">
-        <img src="gallery/gallery-5.jpg" alt="Gallery 5"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
-        <div class="gallery-placeholder"><span class="ph-icon">🖼️</span><span>gallery-5.jpg</span></div>
-      </div>
-      <div class="g-item reveal reveal-delay-3">
-        <img src="gallery/gallery-6.jpg" alt="Gallery 6"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
-        <div class="gallery-placeholder"><span class="ph-icon">🖼️</span><span>gallery-6.jpg</span></div>
-      </div>
+    <div class="gallery-grid" id="gallery-grid">
+      <!-- populated dynamically from gallery/photos.txt -->
+    </div>
+
+    <div class="video-grid" id="video-grid">
+      <!-- populated dynamically from links.txt -->
     </div>
   </section>
 
@@ -1058,41 +1061,100 @@
   </footer>
 
   <script>
-    // Scroll reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); }
-      });
-    }, { threshold: 0.12 });
-    reveals.forEach(r => observer.observe(r));
-
-    // Navbar scroll effect
-    const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 60) {
-        nav.style.background = 'rgba(255,255,255,0.92)';
-        nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.1)';
-      } else {
-        nav.style.background = 'rgba(255,255,255,0.72)';
-        nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.06)';
+    // Build the gallery grid from gallery/photos.txt (one filename per line)
+    // and links.txt (one Instagram post/reel URL per line). Add or remove
+    // lines in those files to change what shows up here — no HTML editing needed.
+    async function fetchLines(url) {
+      try {
+        const res = await fetch(url, { cache: 'no-store' });
+        if (!res.ok) return [];
+        const text = await res.text();
+        return text.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+      } catch (e) {
+        return [];
       }
-    });
+    }
 
-    // Animate progress bars on scroll
-    const progressFills = document.querySelectorAll('.progress-bar-fill');
-    const progressObserver = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          const fill = e.target;
-          const targetWidth = fill.style.width;
-          fill.style.width = '0%';
-          setTimeout(() => { fill.style.width = targetWidth; }, 200);
-          progressObserver.unobserve(fill);
+    function makePhotoItem(filename, index) {
+      const item = document.createElement('div');
+      item.className = 'g-item reveal';
+      item.innerHTML =
+        '<img src="gallery/' + filename + '" alt="Gallery photo ' + (index + 1) + '"' +
+        ' onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\'"/>' +
+        '<div class="gallery-placeholder"><span class="ph-icon">🖼️</span><span>' + filename + '</span></div>';
+      return item;
+    }
+
+    function makeVideoItem(url) {
+      const item = document.createElement('div');
+      item.className = 'g-item g-item-video reveal';
+      item.innerHTML =
+        '<blockquote class="instagram-media" data-instgrm-permalink="' + url + '" data-instgrm-version="14"' +
+        ' style="background:#FFF; border:0; border-radius:16px; margin:0 auto; max-width:340px; width:100%;">' +
+        '<a href="' + url + '" target="_blank" rel="noopener">View this reel on Instagram</a></blockquote>';
+      return item;
+    }
+
+    async function buildGallery() {
+      const grid = document.getElementById('gallery-grid');
+      const videoGrid = document.getElementById('video-grid');
+      if (!grid || !videoGrid) return;
+
+      const [photos, links] = await Promise.all([
+        fetchLines('gallery/photos.txt'),
+        fetchLines('links.txt')
+      ]);
+
+      photos.forEach((filename, i) => grid.appendChild(makePhotoItem(filename, i)));
+      links.forEach(url => videoGrid.appendChild(makeVideoItem(url)));
+
+      if (links.length > 0) {
+        const s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.instagram.com/embed.js';
+        document.body.appendChild(s);
+      }
+    }
+
+    (async function init() {
+      await buildGallery();
+
+      // Scroll reveal
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('visible'); }
+        });
+      }, { threshold: 0.12 });
+      reveals.forEach(r => observer.observe(r));
+
+      // Navbar scroll effect
+      const nav = document.querySelector('nav');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 60) {
+          nav.style.background = 'rgba(255,255,255,0.92)';
+          nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.1)';
+        } else {
+          nav.style.background = 'rgba(255,255,255,0.72)';
+          nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.06)';
         }
       });
-    }, { threshold: 0.5 });
-    progressFills.forEach(f => progressObserver.observe(f));
+
+      // Animate progress bars on scroll
+      const progressFills = document.querySelectorAll('.progress-bar-fill');
+      const progressObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const fill = e.target;
+            const targetWidth = fill.style.width;
+            fill.style.width = '0%';
+            setTimeout(() => { fill.style.width = targetWidth; }, 200);
+            progressObserver.unobserve(fill);
+          }
+        });
+      }, { threshold: 0.5 });
+      progressFills.forEach(f => progressObserver.observe(f));
+    })();
   </script>
 </body>
 </html>
